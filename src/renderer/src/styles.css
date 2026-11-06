@@ -1,0 +1,276 @@
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./assets/fonts/JetBrainsMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./assets/fonts/JetBrainsMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./assets/fonts/JetBrainsMono-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./assets/fonts/JetBrainsMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  font-family: 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 12px 14px 14px;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(165deg, #fff5bd 0%, #ffeb96 48%, #ffe27c 100%);
+  border: 1px solid rgba(163, 127, 24, 0.32);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.note__header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 2px 8px 6px;
+  cursor: default;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.note__title {
+  margin: 0;
+  overflow: hidden;
+  color: #7d6516;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.note__actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 7px;
+  -webkit-app-region: no-drag;
+}
+
+.note__status {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b39b3f;
+  opacity: 0.5;
+  transition:
+    background-color 160ms ease,
+    opacity 160ms ease;
+}
+
+.note__status--loading {
+  background: transparent;
+}
+
+.note__status--idle {
+  background: #84952b;
+  opacity: 0.75;
+}
+
+.note__status--pending,
+.note__status--saving {
+  background: #a37d10;
+  opacity: 1;
+  animation: note-pulse 900ms ease-in-out infinite;
+}
+
+.note__status--error {
+  background: #b0432f;
+  opacity: 1;
+}
+
+@keyframes note-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.note__icon-button {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  place-items: center;
+  color: #7d6516;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  opacity: 0.55;
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    opacity 140ms ease;
+  -webkit-app-region: no-drag;
+}
+
+.note__icon-button:hover {
+  background: rgba(125, 101, 22, 0.14);
+  opacity: 1;
+}
+
+.note__icon-button:active {
+  background: rgba(125, 101, 22, 0.22);
+}
+
+.note__icon-button:focus-visible {
+  outline: 2px solid rgba(125, 101, 22, 0.45);
+  outline-offset: 1px;
+}
+
+.note__icon-button--close {
+  font-size: 15px;
+}
+.note__icon {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.note__icon--close {
+  width: 13px;
+  height: 13px;
+  stroke-width: 1.6;
+}
+
+.note__editor {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  padding: 6px 4px 2px;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  color: #433614;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.65;
+  caret-color: #8a6f13;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  tab-size: 2;
+}
+
+.note__editor:focus-visible {
+  outline: 0;
+}
+
+.note__editor[data-empty='true']::before {
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  color: rgba(67, 54, 20, 0.4);
+  content: attr(data-placeholder);
+  pointer-events: none;
+}
+
+.note__editor div,
+.note__editor p {
+  margin: 0;
+}
+
+.note__editor ul,
+.note__editor ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.note__editor b,
+.note__editor strong {
+  font-weight: 700;
+}
+
+.note__editor i,
+.note__editor em {
+  font-style: italic;
+}
+
+.note__editor u {
+  text-decoration: underline;
+}
+
+.note__editor s,
+.note__editor strike {
+  text-decoration: line-through;
+}
+
+.note__editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.note__editor::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.note__editor::-webkit-scrollbar-thumb {
+  background: rgba(125, 101, 22, 0.24);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+.note__editor::-webkit-scrollbar-thumb:hover {
+  background: rgba(125, 101, 22, 0.4);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
