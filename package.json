@@ -1,0 +1,34 @@
+{
+  "name": "sticky-notes",
+  "version": "1.0.0",
+  "description": "A single always-on-top desktop sticky note for Windows",
+  "main": "./out/main/index.js",
+  "author": "Huzaifa Ameer",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "electron-vite dev",
+    "start": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "test": "bun test",
+    "build": "bun run typecheck && electron-vite build",
+    "dist": "bun run build && electron-builder --win",
+    "dist:dir": "bun run build && electron-builder --win --dir"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "electron": "^45.2.3",
+    "electron-builder": "^26.18.0",
+    "electron-vite": "^6.0.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.6"
+  }
+}

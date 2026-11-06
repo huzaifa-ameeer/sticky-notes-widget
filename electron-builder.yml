@@ -1,0 +1,28 @@
+appId: com.huzaifameer.stickynotes
+productName: Sticky Notes
+copyright: Copyright © 2026 Huzaifa Ameer
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**/*
+  - package.json
+asar: true
+npmRebuild: false
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: build/icon.ico
+  artifactName: Sticky-Notes-${version}-Setup.${ext}
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Sticky Notes
+  deleteAppDataOnUninstall: false
+  runAfterFinish: true
